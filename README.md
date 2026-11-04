@@ -1,2 +1,49 @@
 # Dotfiles
-My Linux setup files and dotfiles.
+
+My Linux (i3) setup. Each top-level folder is a [GNU Stow](https://www.gnu.org/software/stow/) package: `stow <name>` links it into `~`.
+
+## Theming
+
+All colours come from one [Base16](https://github.com/tinted-theming/home) scheme, applied by [tinty](https://github.com/tinted-theming/tinty). App configs contain no hex colours; they include a generated file.
+
+| App | Generated file | Notes |
+|---|---|---|
+| alacritty | `~/.config/alacritty/colors.toml` | |
+| polybar | `~/.config/polybar/base16.ini` | `colors.ini` maps it to the names the bar uses |
+| rofi | `~/.config/rofi/colors.rasi` | imported by every rofi style |
+| i3 | `~/.config/i3/colors.conf` | palette + `client-colors.conf` |
+| dunst | `~/.config/dunst/dunstrc.d/99-colors.conf` | dunst is restarted on apply |
+| eww | `~/.config/eww/colors.scss` | `eww/.config/eww/scripts/gen-colors.py` maps the 16 colours to Material names |
+
+Generated files are gitignored. Everything that wires tinty to the apps is in `tinty/.config/tinted-theming/tinty/config.toml`.
+
+### Change theme
+
+- `$mod+Shift+t` opens a rofi list of schemes.
+- Or: `tinty apply base16-gruvbox-dark-hard` (`tinty list` shows all names).
+- Apply the new i3 colours with `$mod+Shift+r`. Windows that are already open keep their old colours.
+- `$mod+Shift+b` only changes the wallpaper.
+
+### Setup on a new machine
+
+```sh
+cargo install tinty --locked
+stow tinty alacritty polybar rofi i3 dunst eww
+tinty sync                              # downloads schemes and app templates
+tinty apply base16-catppuccin-mocha
+```
+
+### Add an app
+
+Add an `[[items]]` block to the tinty config (template repo, theme folder, a `hook` that copies the file to a fixed path), include that path from the app's config, and gitignore it.
+
+### Add your own scheme
+
+Put a Base16 `.yaml` file (same format as the ones in `~/.local/share/tinted-theming/tinty/scheme-repos/schemes/base16/`) in `~/.local/share/tinted-theming/tinty/custom-schemes/base16/`. A file `mine.yaml` is applied as `base16-mine`.
+
+### Scheme from a wallpaper
+
+```sh
+tinty generate-scheme --system base16 --save --slug mine --name "Mine" path/to/image.jpg
+tinty apply base16-mine
+```

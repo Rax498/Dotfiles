@@ -1,0 +1,57 @@
+# tinty: the single source of truth for theming.
+# Docs: https://github.com/tinted-theming/tinty
+#
+# Each [[items]] entry = one app. Its hook copies the generated theme file to
+# a fixed path that the app's own config includes. Generated files are
+# gitignored; never put hex colours in app configs.
+
+default-scheme = "base16-catppuccin-mocha"
+
+# Runs after every apply. eww has no template repo, so a script maps the
+# palette to its Material colour names, then eww reloads.
+hooks = ["~/.config/eww/scripts/gen-colors.py && eww reload >/dev/null 2>&1 || true"]
+
+# --- alacritty -------------------------------------------------------------
+# alacritty.toml has: import = ["~/.config/alacritty/colors.toml"]
+[[items]]
+name = "tinted-terminal-alacritty"
+path = "https://github.com/tinted-theming/tinted-terminal"
+themes-dir = "themes/alacritty"
+supported-systems = ["base16", "base24"]
+hook = "cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/alacritty/colors.toml && touch ~/.config/alacritty/alacritty.toml"
+
+# --- polybar ---------------------------------------------------------------
+# config.ini includes ~/.config/polybar/base16.ini (generated)
+[[items]]
+name = "base16-polybar"
+path = "https://github.com/tinted-theming/base16-polybar"
+themes-dir = "colors"
+hook = "cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/polybar/base16.ini; polybar-msg cmd restart >/dev/null 2>&1 || true"
+
+# --- rofi ------------------------------------------------------------------
+# every rofi style imports ~/.config/rofi/colors.rasi (generated)
+[[items]]
+name = "base16-rofi"
+path = "https://github.com/tinted-theming/base16-rofi"
+themes-dir = "colors"
+hook = "cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/rofi/colors.rasi"
+
+# --- i3 --------------------------------------------------------------------
+# i3 config includes ~/.config/i3/colors.conf = palette + client-colors.conf. No reload here:
+# i3 reload re-runs autostart; apply the colours with $mod+Shift+r.
+[[items]]
+name = "base16-i3"
+path = "https://github.com/tinted-theming/base16-i3"
+themes-dir = "colors"
+theme-file-extension = ".config"
+hook = "cat \"$TINTY_THEME_FILE_PATH\" ~/.config/i3/client-colors.conf > ~/.config/i3/colors.conf"
+
+# --- dunst -----------------------------------------------------------------
+# dunst reads colours from the dunstrc.d drop-in folder (generated);
+# dunst 1.9 has no reload command, so the hook restarts it
+[[items]]
+name = "base16-dunst"
+path = "https://github.com/tinted-theming/base16-dunst"
+themes-dir = "themes"
+theme-file-extension = ".dunstrc"
+hook = "mkdir -p ~/.config/dunst/dunstrc.d && cp -f \"$TINTY_THEME_FILE_PATH\" ~/.config/dunst/dunstrc.d/99-colors.conf; pkill -x dunst; setsid -f dunst >/dev/null 2>&1"

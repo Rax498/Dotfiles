@@ -58,6 +58,6 @@ SELECTED=$(cat "$CACHE_DIR/rofi_list_cache" | rofi -dmenu -i \
 
 # --- Eksekusi WPG ---
 if [ -n "$SELECTED" ]; then
-    # Jalankan WPG
-    m3wal "$WALLPAPER_DIR/$SELECTED"
+    # Wallpaper only. Colours come from tinty (`theme-set`), not the wallpaper.
+    feh --bg-fill "$WALLPAPER_DIR/$SELECTED"
 fi

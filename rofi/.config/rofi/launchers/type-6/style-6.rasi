@@ -12,7 +12,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import "~/.cache/m3-colors/rofi.rasi"
+@import "~/.config/rofi/colors.rasi"
 
 /*****----- Main Window -----*****/
 window {

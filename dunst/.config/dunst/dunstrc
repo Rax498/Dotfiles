@@ -31,8 +31,6 @@
     
     # Borders & Radius
     frame_width = 2
-    frame_color = "#8a919d"
-    separator_color = "frame"
     corner_radius = 10
 
     # Icons
@@ -54,22 +52,10 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    # Surface Dim untuk low urgency
-    background = "#101419"
-    foreground = "#c0c7d4"
-    frame_color = "#414752"
     timeout = 4
 
 [urgency_normal]
-    # Surface Container High (Warna standar M3 untuk dialog/popup)
-    background = "#101419"
-    foreground = "#e0e2ea"
-    frame_color = "#0173c8"
     timeout = 8
 
 [urgency_critical]
-    # Error Container (Merah M3) untuk critical
-    background = "#93000a"
-    foreground = "#ffdad6"
-    frame_color = "#ffb4ab"
     timeout = 0

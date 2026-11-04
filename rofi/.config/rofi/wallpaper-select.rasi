@@ -1,5 +1,5 @@
 /* ~/.config/rofi/wallpaper-select.rasi */
-@import "~/.cache/m3-colors/rofi.rasi"
+@import "~/.config/rofi/colors.rasi"
 
 * {
     font: "JetBrains Mono Nerd Font Bold 10";
