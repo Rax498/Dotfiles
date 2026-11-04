@@ -25,7 +25,23 @@ return {
     indent = { enabled = true },
     input = { enabled = true },
     git = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      sources = {
+        -- Show gitignored files (config.toml, .env.local, ...) but keep the
+        -- big generated trees out of the results.
+        files = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git", "node_modules", "dist", "build", "vendor", ".venv", "target" },
+        },
+        explorer = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git", "node_modules", "dist", "build", "vendor", ".venv", "target" },
+        },
+      },
+    },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scroll = { enabled = false },
