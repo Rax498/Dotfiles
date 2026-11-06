@@ -15,6 +15,8 @@ All colours come from one [Base16](https://github.com/tinted-theming/home) schem
 | dunst | `~/.config/dunst/dunstrc.d/99-colors.conf` | dunst is restarted on apply |
 | eww | `~/.config/eww/colors.scss` | `eww/.config/eww/scripts/gen-colors.py` maps the 16 colours to Material names |
 
+`lazygit` is not driven by tinty: `lazygit/.config/lazygit/config.yml` is the fixed Luna theme from [luna.nvim](https://github.com/WTFox/luna.nvim). (Inside nvim, snacks.nvim colours lazygit from the nvim colourscheme instead.)
+
 Generated files are gitignored. Everything that wires tinty to the apps is in `tinty/.config/tinted-theming/tinty/config.toml`.
 
 ### Change theme
