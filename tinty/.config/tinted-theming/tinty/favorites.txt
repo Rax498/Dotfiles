@@ -1,3 +1,4 @@
+base16-luna
 base16-tokyo-night-dark
 base16-tokyo-night-light
 base16-tokyo-night-moon

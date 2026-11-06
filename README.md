@@ -39,7 +39,7 @@ Add an `[[items]]` block to the tinty config (template repo, theme folder, a `ho
 
 ### Add your own scheme
 
-Put a Base16 `.yaml` file (same format as the ones in `~/.local/share/tinted-theming/tinty/scheme-repos/schemes/base16/`) in `~/.local/share/tinted-theming/tinty/custom-schemes/base16/`. A file `mine.yaml` is applied as `base16-mine`.
+Put a Base16 `.yaml` file (same format as the ones in `~/.local/share/tinted-theming/tinty/scheme-repos/schemes/base16/`) in `tinty/.local/share/tinted-theming/tinty/custom-schemes/base16/`, run `stow tinty`, and add `base16-<name>` to `favorites.txt`. `luna.yaml` there is an example ([WTFox/luna.nvim](https://github.com/WTFox/luna.nvim)); its palette comes from the theme's alacritty file.
 
 ### Scheme from a wallpaper
 

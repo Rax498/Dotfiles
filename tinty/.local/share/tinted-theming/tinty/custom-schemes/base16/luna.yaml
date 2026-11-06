@@ -1,0 +1,21 @@
+system: "base16"
+name: "Luna"
+author: "WTFox (https://github.com/WTFox/luna.nvim)"
+variant: "dark"
+palette:
+  base00: "#060606" # background
+  base01: "#1c1c1c" # alacritty indexed colour 18
+  base02: "#404040" # selection background
+  base03: "#888888" # bright black
+  base04: "#888888" # alacritty indexed colour 20
+  base05: "#e4e4e8" # foreground
+  base06: "#c7c7c7" # alacritty indexed colour 21
+  base07: "#ffffff" # bright white
+  base08: "#e08585" # red
+  base09: "#a8a8a8" # alacritty indexed colour 16
+  base0A: "#c2916a" # yellow
+  base0B: "#6fbe80" # green
+  base0C: "#75a1c7" # cyan
+  base0D: "#75a1c7" # blue
+  base0E: "#c4a8d6" # magenta
+  base0F: "#c2916a" # alacritty indexed colour 17
