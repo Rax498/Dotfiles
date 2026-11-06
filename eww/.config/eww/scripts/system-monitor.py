@@ -384,14 +384,11 @@ class SystemMonitor:
                 nm_props.Get("org.freedesktop.NetworkManager", "WirelessEnabled")
             )
 
-            state = int(nm_props.Get("org.freedesktop.NetworkManager", "State"))
-            self.state.wifi_connected = state == 70  # NM_STATE_CONNECTED_GLOBAL
-
-            if not self.state.wifi_connected:
-                self.state.wifi_signal = 0
-                self.state.wifi_ssid = ""
-                self.state.wifi_security = ""
-                return
+            # Connected only if a WiFi device is active (set in the loop below).
+            self.state.wifi_connected = False
+            self.state.wifi_signal = 0
+            self.state.wifi_ssid = ""
+            self.state.wifi_security = ""
 
             devices = nm.GetDevices(dbus_interface="org.freedesktop.NetworkManager")
             for dev_path in devices:
@@ -427,86 +424,12 @@ class SystemMonitor:
                 self.state.wifi_ssid = bytes(ssid_bytes).decode(
                     "utf-8", errors="replace"
                 )
+                self.state.wifi_connected = True
                 self.state.wifi_signal = int(
                     ap_props.Get(
                         "org.freedesktop.NetworkManager.AccessPoint", "Strength"
                     )
                 )
-                flags = int(
-                    ap_props.Get("org.freedesktop.NetworkManager.AccessPoint", "Flags")
-                )
-                wpa = int(
-                    ap_props.Get(
-                        "org.freedesktop.NetworkManager.AccessPoint", "WpaFlags"
-                    )
-                )
-                rsn = int(
-                    ap_props.Get(
-                        "org.freedesktop.NetworkManager.AccessPoint", "RsnFlags"
-                    )
-                )
-                if rsn > 0:
-                    self.state.wifi_security = "WPA2"
-                elif wpa > 0:
-                    self.state.wifi_security = "WPA"
-                elif flags & 0x1:
-                    self.state.wifi_security = "WEP"
-                else:
-                    self.state.wifi_security = "Open"
-                break
-        except Exception as e:
-            print(f"[system-monitor] WiFi signal error: {e}", file=sys.stderr)
-
-    def _read_wifi_signal(self):
-        try:
-            nm = self.system_bus.get_object(
-                "org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager"
-            )
-            props = dbus.Interface(nm, "org.freedesktop.DBus.Properties")
-            ac_path = str(
-                props.Get("org.freedesktop.NetworkManager", "PrimaryConnection")
-            )
-            if ac_path == "/":
-                self.state.wifi_signal = 0
-                self.state.wifi_ssid = ""
-                self.state.wifi_security = ""
-                return
-            ac = self.system_bus.get_object("org.freedesktop.NetworkManager", ac_path)
-            ac_props = dbus.Interface(ac, "org.freedesktop.DBus.Properties")
-
-            # Ambil SSID dari connection ID
-            self.state.wifi_ssid = str(
-                ac_props.Get("org.freedesktop.NetworkManager.Connection.Active", "Id")
-            )
-
-            dev_paths = ac_props.Get(
-                "org.freedesktop.NetworkManager.Connection.Active", "Devices"
-            )
-            for dev_path in dev_paths:
-                dev = self.system_bus.get_object(
-                    "org.freedesktop.NetworkManager", str(dev_path)
-                )
-                dev_props = dbus.Interface(dev, "org.freedesktop.DBus.Properties")
-                ap_path = str(
-                    dev_props.Get(
-                        "org.freedesktop.NetworkManager.Device.Wireless",
-                        "ActiveAccessPoint",
-                    )
-                )
-                if ap_path == "/":
-                    continue
-                ap = self.system_bus.get_object(
-                    "org.freedesktop.NetworkManager", ap_path
-                )
-                ap_props = dbus.Interface(ap, "org.freedesktop.DBus.Properties")
-
-                self.state.wifi_signal = int(
-                    ap_props.Get(
-                        "org.freedesktop.NetworkManager.AccessPoint", "Strength"
-                    )
-                )
-
-                # Flags: 0x1=WEP, WpaFlags/RsnFlags > 0 = WPA/WPA2
                 flags = int(
                     ap_props.Get("org.freedesktop.NetworkManager.AccessPoint", "Flags")
                 )

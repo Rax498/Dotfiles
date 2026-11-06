@@ -10,9 +10,9 @@ PANEL=$1
 
 # Daemon handling
 if [ "$PANEL" = "wifi_window" ]; then
-    pkill -f wifi_daemon.sh 2>/dev/null
+    pkill -f 'wifi.py watch' 2>/dev/null
     if ! eww active-windows | grep -q wifi_window; then
-        (eww update wifi_networks="$(~/.config/eww/scripts/scan_wifi.sh)" && ~/.config/eww/scripts/wifi_daemon.sh) &
+        ~/.config/eww/scripts/wifi.py watch &
     fi
 fi
 

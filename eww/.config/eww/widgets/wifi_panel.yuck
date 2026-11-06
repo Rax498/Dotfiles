@@ -8,9 +8,9 @@
 ;; WIDGETS
 ;;-----------------------------------------------------
 
-(defwidget wifi_network_item [ssid signal secured connected sig_icon sec_icon]
+(defwidget wifi_network_item [ssid signal secured connected sig_icon sec_icon bssid]
   (button :class "wifi-network-item ${connected == 'true' ? 'wifi-connected' : ''}"
-          :onclick "~/.config/eww/scripts/connect_wifi.sh '${ssid}' &"
+          :onclick "~/.config/eww/scripts/wifi.py select ${bssid} &"
     (box :orientation "h"
          :spacing 10
          :space-evenly false
@@ -46,7 +46,7 @@
            :class "wifi-panel-container"
 
         (button :class "wifi-power-toggle"
-                :onclick "~/.config/eww/scripts/toggle_wifi.sh"
+                :onclick "~/.config/eww/scripts/wifi.py toggle &"
           (stack :selected {system_status.wifi_powered ? 0 : 1}
                  :transition "slideleft"
                  :same-size true
@@ -85,7 +85,8 @@
                              :secured {network.secured}
                              :connected {network.connected}
                              :sig_icon {network.sig_icon}
-                             :sec_icon {network.sec_icon}))
+                             :sec_icon {network.sec_icon}
+                             :bssid {network.bssid}))
         (label :class "wifi-no-networks"
                :text "No networks found"
                :visible {wifi_networks == "[]" || system_status.wifi_powered != "true"})
