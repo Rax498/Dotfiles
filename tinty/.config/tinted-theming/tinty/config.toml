@@ -8,8 +8,8 @@
 default-scheme = "base16-catppuccin-mocha"
 
 # Runs after every apply. eww has no template repo, so a script maps the
-# palette to its Material colour names, then eww reloads.
-hooks = ["~/.config/eww/scripts/gen-colors.py && eww reload >/dev/null 2>&1 || true"]
+# palette to its Material colour names and reloads eww.
+hooks = ["~/.config/eww/scripts/gen-colors.py"]
 
 # --- alacritty -------------------------------------------------------------
 # alacritty.toml has: import = ["~/.config/alacritty/colors.toml"]

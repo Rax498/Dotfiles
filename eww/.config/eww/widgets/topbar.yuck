@@ -1,9 +1,7 @@
 ;; Eww Bar Configuration
 
-;; Static: the reference ran a permanent inotifywait daemon here purely to
-;; swap a light/dark logo. Fixed value instead -- one less background process.
-;; "light" is correct for a dark theme: it selects the light-coloured logo,
-;; which is what shows up against the dark bar (matches the reference's hook).
+;; Which logo file to show ("light" logo on a dark bar, "dark" on a light bar).
+;; gen-colors.py sets it when the colour scheme changes.
 (defvar icon-theme "light")
 
 (deflisten workspaces :initial "[]" 

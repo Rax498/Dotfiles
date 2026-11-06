@@ -4,6 +4,12 @@
 
 /* Import colors */
 @import "colors.scss";
+
+/* Default text colour for everything that does not set its own */
+window {
+  color: $on-surface;
+}
+
 @import "./styling/system-monitor-dark.scss";
 @import "./styling/control_center-dark.scss";
 @import "./styling/topbar-dark.scss";
