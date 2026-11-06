@@ -9,7 +9,7 @@ All colours come from one [Base16](https://github.com/tinted-theming/home) schem
 | App | Generated file | Notes |
 |---|---|---|
 | alacritty | `~/.config/alacritty/colors.toml` | |
-| polybar | `~/.config/polybar/base16.ini` | `colors.ini` maps it to the names the bar uses |
+| polybar | `~/.config/polybar/base16.ini` | optional: not started at login (the eww bar is); run `polybar/.config/polybar/launch_polybar.sh` to use it. `colors.ini` maps the palette to the names the bar uses |
 | rofi | `~/.config/rofi/colors.rasi` | imported by every rofi style |
 | i3 | `~/.config/i3/colors.conf` | palette + `client-colors.conf` |
 | dunst | `~/.config/dunst/dunstrc.d/99-colors.conf` | dunst is restarted on apply |
