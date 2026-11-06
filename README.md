@@ -19,7 +19,7 @@ Generated files are gitignored. Everything that wires tinty to the apps is in `t
 
 ### Change theme
 
-- `$mod+Shift+t` opens a rofi list of schemes.
+- `$mod+Shift+t` opens a rofi list of my favourite schemes (`tinty/.config/tinted-theming/tinty/favorites.txt`: add or remove names there).
 - Or: `tinty apply base16-gruvbox-dark-hard` (`tinty list` shows all names).
 - Apply the new i3 colours with `$mod+Shift+r`. Windows that are already open keep their old colours.
 - `$mod+Shift+b` only changes the wallpaper.

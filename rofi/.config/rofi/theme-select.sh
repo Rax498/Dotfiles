@@ -1,6 +1,8 @@
 #!/bin/bash
-# Pick a base16 colour scheme in rofi and apply it with tinty.
+# Pick a colour scheme from my favourites and apply it with tinty.
+# To add or remove a scheme, edit favorites.txt (`tinty list` shows all names).
 TINTY="$HOME/.cargo/bin/tinty"
+FAVORITES="$HOME/.config/tinted-theming/tinty/favorites.txt"
 
-scheme=$("$TINTY" list | grep '^base16-' | rofi -dmenu -i -p "theme")
+scheme=$(rofi -dmenu -i -p "theme" < "$FAVORITES")
 [ -n "$scheme" ] && "$TINTY" apply "$scheme"
