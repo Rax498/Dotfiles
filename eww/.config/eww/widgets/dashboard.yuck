@@ -305,12 +305,7 @@
       ;; image viewer
       (button :class "app-button"
               :onclick "xviewer & eww close performance_monitor"
-        (label :class "app-icon-4" :text ""))
-      
-      ;; camera
-      (button :class "app-button"
-              :onclick "cheese & eww close performance_monitor"
-        (label :class "app-icon-5" :text "")))
+        (label :class "app-icon-4" :text "")))
     ))
 
 ;; WIDGET MEDIA PLAYER
