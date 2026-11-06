@@ -50,10 +50,6 @@ def bat_icon_discharging(pct: int) -> str:
     return icons[min(pct // 10, 9)]
 
 
-def bt_icon(connected: bool) -> str:
-    return "󰂱" if connected else "󰂯"
-
-
 def bright_icon(pct: int) -> str:
     if pct <= 25:
         return "󰃞"

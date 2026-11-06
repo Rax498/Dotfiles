@@ -5,12 +5,10 @@ Zero polling: hanya trigger saat ada window event dari i3
 """
 
 import json
-import os
 import socket
 import struct
 import subprocess
 import sys
-from pathlib import Path
 
 # ─── i3 IPC ───────────────────────────────────────────────────────────────────
 

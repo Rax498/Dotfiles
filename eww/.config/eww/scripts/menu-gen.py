@@ -11,7 +11,6 @@ Usage:
 """
 
 import ctypes
-import errno
 import json
 import os
 import select
@@ -19,7 +18,6 @@ import struct
 import sys
 import time
 from configparser import ConfigParser, MissingSectionHeaderError
-from io import StringIO
 import re
 from pathlib import Path
 
