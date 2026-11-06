@@ -53,8 +53,8 @@ bindsym $mod+d exec ~/.config/rofi/launchers/type-6/launcher.sh
 bindsym $mod+Shift+h exec ~/.config/i3/i3-help.sh
 
 # Workspace cycling with looping
-bindsym Ctrl+Mod4+Right exec --no-startup-id ~/.config/Scripts/ws_cycle.py next
-bindsym Ctrl+Mod4+Left exec --no-startup-id ~/.config/Scripts/ws_cycle.py prev
+bindsym Ctrl+Mod4+Right exec --no-startup-id ~/.config/Scripts/ws_cycle.sh next
+bindsym Ctrl+Mod4+Left exec --no-startup-id ~/.config/Scripts/ws_cycle.sh prev
 
 # Locker
 bindsym $mod+l exec --no-startup-id lock
@@ -71,9 +71,6 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/brightness.sh up && ~/.config/eww/scripts/brightness-popup.sh
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/brightness.sh down && ~/.config/eww/scripts/brightness-popup.sh
-
-# is used in the bar {} block below.
-font terminess:monospace 9
 
 # is used in the bar {} block below.
 font terminess:monospace 9
