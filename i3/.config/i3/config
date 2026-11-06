@@ -121,7 +121,7 @@ bindsym --release Print exec scrot ~/Pictures/Screenshots/screenshot_%Y%m%d_%H%M
 bindsym --release $mod+Shift+s exec scrot -s ~/Pictures/Screenshots/screenshot_%Y%m%d_%H%M%S.png
 
 # Area selection → clipboard
-bindsym --release $mod+Shift+c exec scrot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png
+bindsym --release $mod+Ctrl+Shift+s exec scrot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png
 
 # kill focused window
 bindsym $mod+w kill

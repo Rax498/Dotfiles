@@ -50,7 +50,10 @@ def scan():
                 "device", "wifi", "list", "--rescan", "no").stdout
     aps = []
     for line in out.splitlines():
-        in_use, ssid, signal, security, bssid = fields(line)
+        parts = fields(line)
+        if len(parts) != 5:
+            continue
+        in_use, ssid, signal, security, bssid = parts
         if ssid:
             aps.append({"ssid": ssid, "signal": int(signal or 0),
                         "security": security, "bssid": bssid,
@@ -153,8 +156,12 @@ def select(bssid):
         say("Network is no longer in range")
     elif any(a["connected"] and a["ssid"] == ap["ssid"] for a in aps):
         # `device disconnect` also stops NetworkManager from auto-reconnecting.
-        nmcli("device", "disconnect", wifi_device())
-        say(f"Disconnected from {ap['ssid']}")
+        device = wifi_device()
+        if device:
+            nmcli("device", "disconnect", device)
+            say(f"Disconnected from {ap['ssid']}")
+        else:
+            say("No WiFi device found")
     else:
         connect(ap)
     refresh()
@@ -164,6 +171,9 @@ def toggle():
     on = nmcli("radio", "wifi").stdout.strip() == "enabled"
     nmcli("radio", "wifi", "off" if on else "on")
     time.sleep(1)
+    if not on:
+        nmcli("device", "wifi", "rescan")  # cache is empty right after enabling
+        time.sleep(2)
     refresh()
 
 
