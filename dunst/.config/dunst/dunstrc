@@ -38,7 +38,7 @@
     min_icon_size = 48
     max_icon_size = 48
     enable_recursive_icon_lookup = true
-    icon_theme = Adwaita
+    icon_theme = Papirus-Dark
 
     # --- TEXT HANDLING ---
     ellipsize = end
