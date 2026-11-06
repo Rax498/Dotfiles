@@ -277,9 +277,9 @@
               :vexpand false
         (label :class "app-icon" :xalign 0.5 :text ""))
       
-      ;; pcmanfm
+      ;; file manager
       (button :class "app-button"
-              :onclick "pcmanfm & eww close performance_monitor"
+              :onclick "nemo & eww close performance_monitor"
         (label :class "app-icon-1" :text "")))
     
     ;; Row 2
@@ -292,9 +292,9 @@
               :onclick "alacritty -e nvim & eww close performance_monitor"
         (label :class "app-icon-2" :text ""))
       
-      ;; calibre
+      ;; document reader
       (button :class "app-button"
-              :onclick "calibre & eww close performance_monitor"
+              :onclick "xreader & eww close performance_monitor"
         (label :class "app-icon-3" :text "")))
 
     ;; Row 3
@@ -304,10 +304,10 @@
       
       ;; image viewer
       (button :class "app-button"
-              :onclick "qimgv & eww close performance_monitor"
+              :onclick "xviewer & eww close performance_monitor"
         (label :class "app-icon-4" :text ""))
       
-      ;; Terminal
+      ;; camera
       (button :class "app-button"
               :onclick "cheese & eww close performance_monitor"
         (label :class "app-icon-5" :text "")))

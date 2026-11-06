@@ -94,7 +94,7 @@ bindsym $mod+Shift+Return exec DRI_PRIME=1 alacritty
 bindsym $mod+Return exec alacritty
 
 # start file manager
-bindsym $mod+Shift+f exec dolphin
+bindsym $mod+Shift+f exec nemo
 
 # Browser binding
 # bindsym $mod+Shift+Return exec firefox
