@@ -5,6 +5,7 @@ Zero polling: hanya trigger saat ada window event dari i3
 """
 
 import json
+import os
 import socket
 import struct
 import subprocess
@@ -19,6 +20,9 @@ HDR_SIZE = HDR.size  # 14 bytes
 MSG_SUBSCRIBE = 2
 MSG_GET_TREE = 4
 EVENT_WINDOW = 0x80000003
+
+# Created by toggle-bar.sh while the bar is hidden on purpose.
+BAR_HIDDEN_FLAG = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "eww-bar-hidden")
 
 
 def _get_socket_path() -> str:
@@ -109,7 +113,7 @@ def run():
                 flush=True,
             )
             subprocess.run(["eww", "close", "bar"], capture_output=True)
-        else:
+        elif not os.path.exists(BAR_HIDDEN_FLAG):
             print(
                 "[fullscreen-monitor] Kembali normal → buka bar",
                 file=sys.stderr,

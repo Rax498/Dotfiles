@@ -34,6 +34,8 @@ killall eww 2>/dev/null
 eww daemon
 # wait for the daemon's IPC socket before opening the bar, or `open` races it
 while ! eww ping &>/dev/null; do sleep 0.1; done
+# a reload/restart brings the bar back, so forget any "hidden" state
+rm -f "${XDG_RUNTIME_DIR:-/tmp}/eww-bar-hidden"
 eww open bar
 
 # 6. Monitor scripts

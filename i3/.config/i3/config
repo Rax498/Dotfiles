@@ -72,19 +72,8 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/brightness.sh up && ~/.config/eww/scripts/brightness-popup.sh
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/brightness.sh down && ~/.config/eww/scripts/brightness-popup.sh
 
-# is used in the bar {} block below.
-font terminess:monospace 9
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+# Font for window titles and tab headers. Its size sets the header height.
+font pango:JetBrainsMono Nerd Font 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -107,6 +96,9 @@ bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-5/powermenu.sh
 bindsym $mod+Escape exec ~/.config/rofi/powermenu/type-5/powermenu.sh
 bindsym $mod+Mod1+space exec ~/.config/eww/scripts/toggle-panel.sh start_menu
 bindsym $mod+Ctrl+t exec eww open --toggle performance_monitor
+
+# show / hide the top bar (and the space reserved for it)
+bindsym $mod+z exec --no-startup-id ~/.config/eww/scripts/toggle-bar.sh
 
 # start wpg
 bindsym $mod+Shift+b exec ~/.config/rofi/wpg-select.sh
@@ -159,11 +151,23 @@ bindsym $mod+h split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Ctrl+s layout stacking
+# scratchpad
 bindsym $mod+s scratchpad show
 bindsym $mod+Alt+s move scratchpad
-bindsym $mod+Ctrl+w layout tabbed
+
+# container layout: $mod+g enters the layout mode, one key picks the layout
+mode "layout" {
+        bindsym t layout tabbed; mode "default"
+        bindsym s layout stacking; mode "default"
+        bindsym d layout default; mode "default"
+        bindsym e layout toggle split; mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+g mode "default"
+}
+
+bindsym $mod+g mode "layout"
 bindsym $mod+e layout toggle split
 
 # focus the parent container
