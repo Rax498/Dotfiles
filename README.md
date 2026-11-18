@@ -49,3 +49,25 @@ Put a Base16 `.yaml` file (same format as the ones in `~/.local/share/tinted-the
 tinty generate-scheme --system base16 --save --slug mine --name "Mine" path/to/image.jpg
 tinty apply base16-mine
 ```
+
+## Keybindings
+
+`Super+Ctrl+k` opens a searchable list of every shortcut; the full list is also in
+[KEYBINDINGS.md](KEYBINDINGS.md). The modifier tells you
+what a key does, and directions are always `h j k l` (arrow keys work too):
+
+| Modifier | Meaning | Examples |
+|---|---|---|
+| `Super` | go to something / main action | focus `h j k l`, workspace `1-0`, close `w`, float `t`, fullscreen `f` |
+| `Super+Shift` | **move** it | move window `h j k l`, send to workspace `1-0`, to scratchpad `minus` |
+| `Super+Alt` | reshape the **layout** (i3's stock layout letters) | split `h` / `v`, tabbed `w`, stacking `s`, toggle split `e` |
+| `Super+Ctrl` | **system** / session | lock `l`, shortcut help `k`, performance monitor `t` |
+
+Tabs: `Super+Alt+w` makes the container tabbed, `Super+h` / `Super+l` switch tabs,
+`Super+Alt+e` goes back to normal tiling. `Super+g` (Omarchy's key) toggles tabs
+on and off with one key.
+
+Floating: `Super+t` (or `Super+Shift+space`) floats / unfloats the focused window, any
+number of windows can float. `Super+space` switches focus between the floating and
+the tiling windows. Hold `Super` and drag: left mouse button moves, right mouse
+button resizes.

@@ -1,6 +1,12 @@
 # i3 config file (v4)
+# Reference: https://i3wm.org/docs/userguide.html
 #
-# Please see https://i5wm.org/docs/userguide.html for a complete reference!
+# KEYBINDING PATTERN  (Super = $mod). The modifier tells you what a key does:
+#   Super         go to something / main action  focus h j k l, workspaces 1-0, close w
+#   Super+Shift   MOVE it                        move h j k l, send to workspace 1-0
+#   Super+Alt     reshape the LAYOUT             h v split, w tabbed, s stacking, e toggle split
+#   Super+Ctrl    SYSTEM / session               l lock, k shortcut help, t performance monitor
+# Directions are always h j k l (left down up right); arrow keys do the same as a backup.
 
 # Border configuration
 set $thick 2
@@ -46,18 +52,17 @@ gaps top 32
 gaps bottom 0
 
 # PROTIP: You can also dynamically set dmenu's colors this way:
-bindsym $mod+space exec ~/.config/rofi/launchers/type-6/launcher.sh
 bindsym $mod+d exec ~/.config/rofi/launchers/type-6/launcher.sh
 
 # Show Keybindings Help
-bindsym $mod+Shift+h exec ~/.config/i3/i3-help.sh
+bindsym $mod+Ctrl+k exec ~/.config/i3/i3-help.sh
 
 # Workspace cycling with looping
 bindsym Ctrl+Mod4+Right exec --no-startup-id ~/.config/Scripts/ws_cycle.sh next
 bindsym Ctrl+Mod4+Left exec --no-startup-id ~/.config/Scripts/ws_cycle.sh prev
 
 # Locker
-bindsym $mod+l exec --no-startup-id lock
+bindsym $mod+Ctrl+l exec --no-startup-id lock
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && ~/.config/eww/scripts/volume-popup.sh
@@ -115,60 +120,48 @@ bindsym --release $mod+Shift+s exec scrot -s ~/Pictures/Screenshots/screenshot_%
 # Area selection → clipboard
 bindsym --release $mod+Ctrl+Shift+s exec scrot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png
 
-# kill focused window
+# close focused window
 bindsym $mod+w kill
-bindsym $mod+Shift+q kill
 
-# change focus
-# bindsym $mod+Left focus left
-# bindsym $mod+Down focus down
-# bindsym $mod+Up focus up
-# bindsym $mod+Right focus right
+# focus: h j k l (arrows as backup). In a tabbed container h / l switch tabs,
+# in a stacked one j / k switch windows.
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
-bindsym $mod+ctrl+h focus left
-bindsym $mod+ctrl+j focus down
-bindsym $mod+ctrl+k focus up
-bindsym $mod+ctrl+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+# move the focused window (or tab): Shift + the same keys
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+v split h
-
-# split in vertical orientation
-bindsym $mod+h split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# scratchpad
-bindsym $mod+s scratchpad show
-bindsym $mod+Alt+s move scratchpad
+# scratchpad: show it / move the window into it
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
 
-# container layout: $mod+g enters the layout mode, one key picks the layout
-mode "layout" {
-        bindsym t layout tabbed; mode "default"
-        bindsym s layout stacking; mode "default"
-        bindsym d layout default; mode "default"
-        bindsym e layout toggle split; mode "default"
+# layout of the focused container: Alt + i3's stock layout keys
+bindsym $mod+Mod1+h split h
+bindsym $mod+Mod1+v split v
+bindsym $mod+Mod1+w layout tabbed
+bindsym $mod+Mod1+s layout stacking
+bindsym $mod+Mod1+e layout toggle split
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+g mode "default"
-}
-
-bindsym $mod+g mode "layout"
-bindsym $mod+e layout toggle split
+# Omarchy-style shortcut: one key toggles tabs on / off (same as the Alt keys above)
+bindsym $mod+g layout toggle tabbed split
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -185,8 +178,12 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# toggle tiling / floating
+# toggle tiling / floating (any number of windows can float)
 bindsym $mod+t floating toggle
+bindsym $mod+Shift+space floating toggle
+
+# switch focus between the floating and the tiling windows (i3 default key)
+bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+v floating toggle, resize set 500 300, move position center
 
 # Switch to workspace
