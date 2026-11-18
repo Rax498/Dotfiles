@@ -149,7 +149,11 @@ bindsym $mod+Shift+Right move right
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# scratchpad: show it / move the window into it
+# SCRATCHPAD: a hidden shelf. The window keeps running but is on no workspace.
+#   $mod+Shift+minus  send the focused window to the shelf (it disappears)
+#   $mod+minus        show the next shelved window as a floating window;
+#                     press again to hide it (repeat to cycle through several)
+#   take one OFF the shelf: show it with $mod+minus, then press $mod+t
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
